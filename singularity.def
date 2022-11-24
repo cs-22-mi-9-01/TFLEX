@@ -8,11 +8,17 @@ From: ubuntu:18.04
     ./TFLEX/* /app/
 
 %post
-    #python --version
     # Set working dir
-    #cd /app/
+    cd /app/
 
-    # Install python modules
+    # Install python 3.10.4
+    apt-get -y update
+    #apt install software-properties-common -y
+    #add-apt-repository -y ppa:deadsnakes/ppa
+    apt install python3-pip -y
+    apt install python3.10 -y
+
+    # Install dependencies
     #pip install -r requirements.txt
 
     # Test
@@ -36,8 +42,10 @@ From: ubuntu:18.04
 
 
 # TO CREATE THE IMAGE ON THE CLOUD:
-#sudo singularity build --sandbox tflex-image singularity.def
-#srun singularity build --nv --fakeroot --sandbox TFLEX-image singularity.def
+#srun singularity build --nv --fakeroot --sandbox tflex-image singularity.def
+
+# TO RUN SHELL:
+#srun --pty singularity shell --pwd /app/ --fakeroot tflex-image
 
 # TO LEARN AND TEST THE MODEL ON THE CLOUD:
 # Fast version:
