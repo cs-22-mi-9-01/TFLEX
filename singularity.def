@@ -1,10 +1,14 @@
 Bootstrap: docker
 From: ubuntu:18.04
 
+%setup
+    #mkdir /app/
+
 %files
     ./TFLEX/* /app/
 
 %post
+    python --version
     # Set working dir
     cd /app/
 
@@ -32,7 +36,8 @@ From: ubuntu:18.04
 
 
 # TO CREATE THE IMAGE ON THE CLOUD:
-#srun singularity build --nv --fakeroot --sandbox de-image Singularity.def
+#sudo singularity build --sandbox tflex-image singularity.def
+#srun singularity build --nv --fakeroot --sandbox TFLEX-image singularity.def
 
 # TO LEARN AND TEST THE MODEL ON THE CLOUD:
 # Fast version:
