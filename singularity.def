@@ -8,17 +8,17 @@ From: ubuntu:18.04
     ./TFLEX/* /app/
 
 %post
-    python --version
+    #python --version
     # Set working dir
-    cd /app/
+    #cd /app/
 
     # Install python modules
-    pip install -r requirements.txt
+    #pip install -r requirements.txt
 
     # Test
-    echo "PWD and contents:"
-    pwd
-    ls
+    #echo "PWD and contents:"
+    #pwd
+    #ls
 
 %runscript
     echo "--- Start run ---"
