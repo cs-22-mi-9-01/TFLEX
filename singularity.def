@@ -1,0 +1,44 @@
+Bootstrap: docker
+From: ubuntu:18.04
+
+%files
+    ./TFLEX/* /app/
+
+%post
+    # Set working dir
+    cd /app/
+
+    # Install python modules
+    pip install -r requirements.txt
+
+    # Test
+    echo "PWD and contents:"
+    pwd
+    ls
+
+%runscript
+    echo "--- Start run ---"
+    echo "executing $@"
+    exec "$@"
+
+%test
+    echo "Test script"
+
+%labels
+    Author jwli21@student.aau.dk
+    Version v0.0.2
+
+
+
+
+# TO CREATE THE IMAGE ON THE CLOUD:
+#srun singularity build --nv --fakeroot --sandbox de-image Singularity.def
+
+# TO LEARN AND TEST THE MODEL ON THE CLOUD:
+# Fast version:
+#srun singularity run --pwd /app/ --nv --writable de-image python main.py -dropout 0.4 -se_prop 0.68 -model DE_TransE -ne 4 -neg_ratio 2 -save_each 2
+
+# Version used in paper: 
+#srun --gres=gpu singularity run --pwd /app/ --nv --writable de-image python main.py -dropout 0.4 -se_prop 0.36 -model DE_TransE
+#srun --gres=gpu singularity run --pwd /app/ --nv --writable de-image python main.py -dropout 0.4 -se_prop 0.36 -model DE_DistMult
+#srun --gres=gpu singularity run --pwd /app/ --nv --writable de-image python main.py -dropout 0.4 -se_prop 0.68 -model DE_SimplE
