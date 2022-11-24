@@ -18,8 +18,11 @@ From: ubuntu:18.04
     apt-get -y update
     apt install software-properties-common -y
     add-apt-repository -y ppa:deadsnakes/ppa
-    apt install python3-pip -y
     apt install python3.10 -y
+
+    # Install pip
+    apt-get install curl -y
+    curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
 
     # Install dependencies
     #pip install -r requirements.txt
