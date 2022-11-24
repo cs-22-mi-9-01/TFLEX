@@ -8,6 +8,9 @@ From: ubuntu:18.04
     ./TFLEX/* /app/
 
 %post
+    # Set non-intaractive
+    export DEBIAN_FRONTEND=noninteractive
+
     # Set working dir
     cd /app/
 
@@ -40,6 +43,8 @@ From: ubuntu:18.04
 
 
 
+# TO CREATE THE IMAGE ON VAGRANT
+#sudo singularity build --sandbox tflex-image singularity.def
 
 # TO CREATE THE IMAGE ON THE CLOUD:
 #srun singularity build --nv --fakeroot --sandbox tflex-image singularity.def
