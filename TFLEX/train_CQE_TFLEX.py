@@ -1,7 +1,4 @@
-"""
-@date: 2021/10/26
-@description: null
-"""
+
 from collections import defaultdict
 from typing import List, Dict, Tuple, Optional, Union, Set
 
@@ -16,11 +13,11 @@ from ComplexTemporalQueryData import ICEWS05_15, ICEWS14, ComplexTemporalQueryDa
 from ComplexTemporalQueryDataloader import TestDataset, TrainDataset
 from expression.ParamSchema import is_entity, is_relation, is_timestamp
 from expression.TFLEX_DSL import is_to_predict_entity_set, query_contains_union_and_we_should_use_DNF
-from toolbox.data.dataloader import SingledirectionalOneShotIterator
-from toolbox.exp.Experiment import Experiment
-from toolbox.exp.OutputSchema import OutputSchema
-from toolbox.utils.Progbar import Progbar
-from toolbox.utils.RandomSeeds import set_seeds
+from toolbox.dataloader import SingledirectionalOneShotIterator
+from toolbox.Experiment import Experiment
+from toolbox.OutputSchema import OutputSchema
+from toolbox.Progbar import Progbar
+from toolbox.RandomSeeds import set_seeds
 
 QueryStructure = str
 TYPE_token = Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]
@@ -1184,14 +1181,14 @@ class MyExperiment(Experiment):
 @click.option("--dataset", type=str, default="ICEWS14", help="Which dataset to use: ICEWS14, ICEWS05_15.")
 @click.option("--name", type=str, default="TFLEX_base", help="Name of the experiment.")
 @click.option("--start_step", type=int, default=0, help="start step.")
-@click.option("--max_steps", type=int, default=300001, help="Number of steps.")
-@click.option("--every_test_step", type=int, default=10000, help="Number of steps.")
-@click.option("--every_valid_step", type=int, default=10000, help="Number of steps.")
+@click.option("--max_steps", type=int, default=4, help="Number of steps.")
+@click.option("--every_test_step", type=int, default=2, help="Number of steps.")
+@click.option("--every_valid_step", type=int, default=2, help="Number of steps.")
 @click.option("--batch_size", type=int, default=512, help="Batch size.")
 @click.option("--test_batch_size", type=int, default=8, help="Test batch size.")
 @click.option('--negative_sample_size', default=128, type=int, help="negative entities sampled per query")
-@click.option("--train_device", type=str, default="cuda:0", help="choice: cuda:0, cuda:1, cpu.")
-@click.option("--test_device", type=str, default="cuda:0", help="choice: cuda:0, cuda:1, cpu.")
+@click.option("--train_device", type=str, default="cpu", help="choice: cuda:0, cuda:1, cpu.")
+@click.option("--test_device", type=str, default="cpu", help="choice: cuda:0, cuda:1, cpu.")
 @click.option("--resume", type=bool, default=False, help="Resume from output directory.")
 @click.option("--resume_by_score", type=float, default=0.0, help="Resume by score from output directory. Resume best if it is 0. Default: 0")
 @click.option("--lr", type=float, default=0.0001, help="Learning rate.")

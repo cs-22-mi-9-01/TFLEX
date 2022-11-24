@@ -9,10 +9,10 @@ from typing import List, Tuple, Dict, Set, Union, Any
 
 import expression
 from expression.ParamSchema import placeholder2sample, get_param_name_list, get_placeholder_list, placeholder2fixed, FixedQuery, clear_placeholder_list
-from toolbox.data.DataSchema import DatasetCachePath, BaseData
-from toolbox.data.DatasetSchema import RelationalTripletDatasetSchema
-from toolbox.data.functional import read_cache, cache_data
-from toolbox.utils.Progbar import Progbar
+from toolbox.DataSchema import DatasetCachePath, BaseData
+from toolbox.DatasetSchema import RelationalTripletDatasetSchema
+from toolbox.functional import read_cache, cache_data
+from toolbox.Progbar import Progbar
 
 
 class ICEWS14(RelationalTripletDatasetSchema):
