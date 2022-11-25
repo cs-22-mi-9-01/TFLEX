@@ -20,7 +20,7 @@ _BEST_SCORE = "best_score"
 _LOSS = "loss"
 
 
-def load_model(model: nn.Module, checkpoint_path="./result/fr_en/model.tar") -> float:
+def load_model(model: nn.Module, checkpoint_path="./result/fr_en/model") -> float:
     checkpoint = torch.load(checkpoint_path)
     model.load_state_dict(checkpoint[_MODEL_STATE_DICT])
     best_score = checkpoint[_BEST_SCORE]
@@ -29,16 +29,13 @@ def load_model(model: nn.Module, checkpoint_path="./result/fr_en/model.tar") -> 
 
 def save_model(model: nn.Module,
                best_score: float,
-               save_path="./result/fr_en/model.tar"):
-    torch.save({
-        _MODEL_STATE_DICT: model.state_dict(),
-        _BEST_SCORE: best_score,
-    }, save_path)
+               save_path="./result/fr_en/model"):
+    torch.save(model, save_path)
 
 
 def load_checkpoint(model: nn.Module,
                     optim: optimizer.Optimizer,
-                    checkpoint_path="./result/fr_en/checkpoint.tar") -> Tuple[int, int, float]:
+                    checkpoint_path="./result/fr_en/checkpoint") -> Tuple[int, int, float]:
     """Loads training checkpoint.
 
     :param checkpoint_path: path to checkpoint
@@ -60,14 +57,8 @@ def save_checkpoint(model: nn.Module,
                     epoch_id: int,
                     step: int,
                     best_score: float,
-                    save_path="./result/fr_en/checkpoint.tar"):
-    torch.save({
-        _MODEL_STATE_DICT: model.state_dict(),
-        _OPTIMIZER_STATE_DICT: optim.state_dict(),
-        _EPOCH: epoch_id,
-        _STEP: step,
-        _BEST_SCORE: best_score,
-    }, save_path)
+                    save_path="./result/fr_en/checkpoint"):
+    torch.save(model, save_path)
 
 
 def save_entity_embedding_list(entity_embedding, embedding_path="./result/fr_en/ATentsembed.txt"):
@@ -84,7 +75,7 @@ class ModelParamStoreSchema:
      2）用于部署的模型参数的保存和读取
     """
 
-    def __init__(self, path: OutputPathSchema, best_checkpoint_filename="best_checkpoint.tar", best_model_filename="best_model.tar"):
+    def __init__(self, path: OutputPathSchema, best_checkpoint_filename="best_checkpoint", best_model_filename="best_model"):
         self.path = path
         self.best_checkpoint_path = path.checkpoint_path(best_checkpoint_filename)
         self.best_model_path = path.deploy_path(best_model_filename)
@@ -107,13 +98,17 @@ class ModelParamStoreSchema:
         return load_checkpoint(model, optim, str(self.best_checkpoint_path))
 
     def checkpoint_path_with_score(self, score: float):
-        return self.path.checkpoint_path("score-" + str(score) + "-checkpoint.tar")
+        return self.path.checkpoint_path("score-" + str(score) + "-checkpoint")
 
     def model_path_with_score(self, score: float):
-        return self.path.deploy_path("score-" + str(score) + "-checkpoint.tar")
+        return self.path.deploy_path("score-" + str(score) + "-checkpoint")
 
     def save_scripts(self, filenames):
         for filename in filenames:
+            # EDITED BLOCK
+            if "train_CQE_TFLEX.py" in filename:
+                continue
+            # EDITED BLOCK END
             with open(filename) as source:
                 with open(self.path.scripts_path(filename), "w") as target:
                     target.writelines(source.readlines())

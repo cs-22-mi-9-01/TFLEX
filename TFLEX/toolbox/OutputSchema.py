@@ -31,13 +31,13 @@ class OutputPathSchema:
     def visualize_path(self, filename) -> Path:
         return self.dir_path_visualize / filename
 
-    def checkpoint_path(self, filename="checkpoint.tar") -> Path:
+    def checkpoint_path(self, filename="checkpoint") -> Path:
         return self.dir_path_checkpoint / filename
 
     def latex_path(self, filename="best.tex") -> Path:
         return self.dir_path_latex / filename
 
-    def deploy_path(self, filename="model.tar") -> Path:
+    def deploy_path(self, filename="model") -> Path:
         return self.dir_path_deploy / filename
 
     def scripts_path(self, filename) -> Path:

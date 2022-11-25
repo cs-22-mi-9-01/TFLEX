@@ -48,7 +48,7 @@ def extract_tar(tar_path, extract_path='.'):
     tar = tarfile.open(tar_path, 'r')
     for item in tar:
         tar.extract(item, extract_path)
-        if item.name.find(".tgz") != -1 or item.name.find(".tar") != -1:
+        if item.name.find(".tgz") != -1 or item.name.find("") != -1:
             extract_tar(item.name, "./" + item.name[:item.name.rfind('/')])
 
 
