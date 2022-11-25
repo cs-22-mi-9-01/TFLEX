@@ -1198,8 +1198,8 @@ class MyExperiment(Experiment):
 @click.option('--gamma', type=float, default=30.0, help="margin in the loss")
 @click.option('--center_reg', type=float, default=0.02, help='center_reg for ConE, center_reg balances the in_cone dist and out_cone dist')
 @click.option('--train_tasks', type=str, default="Pe", help='center_reg for ConE, center_reg balances the in_cone dist and out_cone dist')
-@click.option('--train_all', type=bool, default=True, help='center_reg for ConE, center_reg balances the in_cone dist and out_cone dist')
-@click.option('--eval_tasks', type=str, default="Pe,Pt,Pe2,Pe3", help='center_reg for ConE, center_reg balances the in_cone dist and out_cone dist')
+@click.option('--train_all', type=bool, default=False, help='center_reg for ConE, center_reg balances the in_cone dist and out_cone dist')
+@click.option('--eval_tasks', type=str, default="Pe", help='center_reg for ConE, center_reg balances the in_cone dist and out_cone dist')
 @click.option('--eval_all', type=bool, default=False, help='center_reg for ConE, center_reg balances the in_cone dist and out_cone dist')
 def main(data_home, dataset, name,
          start_step, max_steps, every_test_step, every_valid_step,

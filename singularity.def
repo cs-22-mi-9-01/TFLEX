@@ -44,10 +44,12 @@ From: ubuntu:18.04
     Author jwli21@student.aau.dk
     Version v0.0.2
 
-
+# ------- VAGRANT ------- 
 
 # TO CREATE THE IMAGE ON VAGRANT
 #sudo singularity build --sandbox tflex-image singularity.def
+
+# ------- CLOUD ------- 
 
 # TO CREATE THE IMAGE ON THE CLOUD:
 #srun singularity build --nv --fakeroot --sandbox tflex-image singularity.def
