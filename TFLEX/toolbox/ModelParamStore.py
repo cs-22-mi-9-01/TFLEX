@@ -30,7 +30,10 @@ def load_model(model: nn.Module, checkpoint_path="./result/fr_en/model") -> floa
 def save_model(model: nn.Module,
                best_score: float,
                save_path="./result/fr_en/model"):
-    torch.save(model, save_path)
+    torch.save({
+        _MODEL_STATE_DICT: model.state_dict(),
+        _BEST_SCORE: best_score,
+    }, save_path)
 
 
 def load_checkpoint(model: nn.Module,
@@ -58,7 +61,13 @@ def save_checkpoint(model: nn.Module,
                     step: int,
                     best_score: float,
                     save_path="./result/fr_en/checkpoint"):
-    torch.save(model, save_path)
+    torch.save({
+        _MODEL_STATE_DICT: model.state_dict(),
+        _OPTIMIZER_STATE_DICT: optim.state_dict(),
+        _EPOCH: epoch_id,
+        _STEP: step,
+        _BEST_SCORE: best_score,
+    }, save_path)
 
 
 def save_entity_embedding_list(entity_embedding, embedding_path="./result/fr_en/ATentsembed.txt"):
