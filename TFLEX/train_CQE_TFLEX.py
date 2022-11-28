@@ -2,6 +2,8 @@
 from collections import defaultdict
 from typing import List, Dict, Tuple, Optional, Union, Set
 
+import os
+import json
 import click
 import torch
 import torch.nn as nn
@@ -1224,7 +1226,20 @@ def main(data_home, dataset, name,
     data.load_cache([
         "meta",
         "train_queries_answers", "valid_queries_answers", "test_queries_answers",
+        "entity2idx", "relation2idx", "timestamp2idx",
     ])
+
+    # out_file = open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "output", "entity2idx.json"), "w", encoding="utf8")
+    # json.dump(data.entity2idx, out_file, indent=4)
+    # out_file.close()
+
+    # out_file = open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "output", "relation2idx.json"), "w", encoding="utf8")
+    # json.dump(data.relation2idx, out_file, indent=4)
+    # out_file.close()
+
+    # out_file = open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "output", "timestamp2idx.json"), "w", encoding="utf8")
+    # json.dump(data.timestamp2idx, out_file, indent=4)
+    # out_file.close()
 
     MyExperiment(
         output, data,

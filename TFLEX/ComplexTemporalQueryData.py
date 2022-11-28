@@ -461,6 +461,8 @@ class TemporalKnowledgeData(BaseData):
     def read_cache_data(self, key):
         """Function to read the cached dataset from the memory"""
         path = "cache_%s_path" % key
+        if key == 'timestamp2idx':
+            path = 'cache_timestamps2idx_path'
         if hasattr(self, key) and hasattr(self.cache_path, path):
             key_path = getattr(self.cache_path, path)
             value = read_cache(key_path)
